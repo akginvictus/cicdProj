@@ -26,9 +26,9 @@ jobs:
         run: |
           ls
 
-      - name: Invalid linux command
+      - name: fixed linux command
         run: |
-          mkfolder
+          mkdir testDir
 
 #    - name: Install Dependencies
           #       run: |
