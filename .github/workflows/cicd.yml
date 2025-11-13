@@ -18,9 +18,13 @@ jobs:
         with:
           python-version: 3.9
 
+      - name: Writing a message
+        run: |
+          echo "I'm Aakash"
+
       - name: List Files
         run: |
-          echo "Terry is teaching"
+          ls
 
 #    - name: Install Dependencies
           #       run: |
