@@ -60,6 +60,30 @@ jobs:
         run: |
           docker build -t $DOCKER_USER/devops:${{ github.sha }} .
           docker push $DOCKER_USER/devops:${{ github.sha }}
+          docker tag $DOCKER_USER/devops:${{ github.sha }} $DOCKER_USER/devops:latest
+          docker push $DOCKER_USER/devops:latest
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Configure Azure Web App Container
+        run: |
+          az webapp config container set \
+            --name akgepita \
+            --resource-group Devops_class \
+            --docker-custom-image-name ${{ secrets.CICD_USERNAME }}/devops:latest \
+            --docker-registry-server-url https://index.docker.io/v1 \
+            --docker-registry-server-user ${{ secrets.CICD_USERNAME }} \
+            --docker-registry-server-password ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Set Port Configuration
+        run: |
+          az webapp config appsettings set \
+            --name akgepita \
+            --resource-group Devops_class \
+            --settings WEBSITES_PORT=8000
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
