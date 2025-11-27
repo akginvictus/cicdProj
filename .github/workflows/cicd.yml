@@ -19,27 +19,22 @@ jobs:
           python-version: 3.9
 
       - name: Writing a message
-        run: |
-          echo "I'm Aakash"
+        run: echo "I'm Aakash"
 
       - name: List Files
-        run: |
-          ls
+        run: ls -al
 
-      - name: fixed linux command
+      - name: Create temp directories
         run: |
-          mkdir testDir
+          mkdir -p testDir
+          mkdir -p testDir2
 
-      - name: fixed linux command
+      - name: Install Dependencies
         run: |
-          mkdir testDir2
-      
-      - name: Install Dependencies and Lint Check
-    run: |
-      python -m pip install --upgrade pip
-      pip install -r ../FlaskWebApp-main/requirements.txt
-      python -m pip install flake8
-
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          python -m pip install flake8
+        
 
       - name: Lint Check
         run: |
@@ -60,7 +55,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build and Push Image
-        working-directory: ./FlaskWebApp-main
+        working-directory: ./FlaskWebProject1
         run: |
           docker build -t ${{ secrets.CICD_USERNAME }}/devops:${{ github.sha }} .
           docker push ${{ secrets.CICD_USERNAME }}/devops:${{ github.sha }}
