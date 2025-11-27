@@ -3,7 +3,9 @@ This script runs the FlaskWebProject1 application using a development server.
 """
 
 from os import environ
-from FlaskWebProject1 import app
+from FlaskWebProject1.app import create_app
+
+app = create_app()
 
 if __name__ == '__main__':
     HOST = environ.get('SERVER_HOST', '0.0.0.0')
