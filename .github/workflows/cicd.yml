@@ -34,10 +34,12 @@ jobs:
         run: |
           mkdir testDir2
       
-      - name: Install Dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r ../FlaskWebApp-main/requirements.txt  
+      - name: Install Dependencies and Lint Check
+    run: |
+      python -m pip install --upgrade pip
+      pip install -r ../FlaskWebApp-main/requirements.txt
+      python -m pip install flake8
+
 
       - name: Lint Check
         run: |
