@@ -1,10 +1,58 @@
 {% extends "layout.html" %}
 
 {% block content %}
+<section class="jumbotron text-center" style="margin-top: 40px; background: linear-gradient(135deg, #0d6efd 0%, #6610f2 100%); color: #fff;">
+    <div class="container">
+        <p class="lead text-uppercase letter-spacing">Aakash DevOps Project</p>
+        <h1 class="display-4">Automating delivery with confidence</h1>
+        <p class="lead">From linting to containerization and deployments, this project showcases a resilient CI/CD pipeline built with GitHub Actions and Docker.</p>
+        <a href="{{ url_for('home') }}" class="btn btn-lg btn-light">Back to Dashboard</a>
+    </div>
+</section>
 
-<h2>{{ title }}.</h2>
-<h3>{{ message }}</h3>
+<section class="row">
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Pipeline</h3>
+            </div>
+            <div class="panel-body">
+                <p>Automated linting, testing, and Docker image builds ensure every commit is production ready.</p>
+                <span class="label label-success">GitHub Actions</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Container Strategy</h3>
+            </div>
+            <div class="panel-body">
+                <p>Images are published to Docker Hub with content hashes for traceability and repeatable deployments.</p>
+                <span class="label label-info">Docker</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Team Impact</h3>
+            </div>
+            <div class="panel-body">
+                <p>Developers focus on features while pipelines safeguard quality, uptime, and customer trust.</p>
+                <span class="label label-warning">Reliability</span>
+            </div>
+        </div>
+    </div>
+</section>
 
-<p>Use this area to provide additional information.</p>
+<section class="well">
+    <h3>What makes this special?</h3>
+    <ul class="list-unstyled">
+        <li><span class="glyphicon glyphicon-ok text-success"></span> End-to-end automation from code to container.</li>
+        <li><span class="glyphicon glyphicon-ok text-success"></span> Secure secret management for registry access.</li>
+        <li><span class="glyphicon glyphicon-ok text-success"></span> Production-ready Flask app template with responsive UI.</li>
+    </ul>
+</section>
 
 {% endblock %}
