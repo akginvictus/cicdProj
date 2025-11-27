@@ -30,6 +30,10 @@ jobs:
         run: |
           mkdir testDir
 
+      - name: fixed linux command
+        run: |
+          mkdir testDir2
+
 #    - name: Install Dependencies
           #       run: |
           # python -m pip install --upgrade pip
