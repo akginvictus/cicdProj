@@ -1,25 +1,14 @@
-"""
-Application factory for the Flask project.
-"""
-
 from flask import Flask
-
+from typing import Optional, Type
 from .config import Config
-from .main import bp as main_bp
 
-
-def create_app(config_class: type[Config] | None = None) -> Flask:
-    """Create and configure the Flask application instance."""
+def create_app(config_class: Optional[Type[Config]] = None) -> Flask:
     app = Flask(__name__, instance_relative_config=False)
 
-    config_obj = config_class or Config()
-    app.config.from_object(config_obj)
+    app.config.from_object(config_class or Config)
 
-    register_blueprints(app)
+    from .main import bp as main_bp
+    app.register_blueprint(main_bp)
 
     return app
 
-
-def register_blueprints(app: Flask) -> None:
-    """Register application blueprints."""
-    app.register_blueprint(main_bp)
