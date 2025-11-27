@@ -24,3 +24,7 @@ def register_blueprints(app: Flask) -> None:
     """Register application blueprints."""
     app.register_blueprint(main_bp)
 
+def create_app():
+    app = Flask(__name__)
+    register_blueprints(app)
+    return app
