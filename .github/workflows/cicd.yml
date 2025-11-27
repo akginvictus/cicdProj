@@ -55,7 +55,6 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build and Push Image
-        working-directory: ./FlaskWebProject1
         run: |
           docker build -t ${{ secrets.CICD_USERNAME }}/devops:${{ github.sha }} .
           docker push ${{ secrets.CICD_USERNAME }}/devops:${{ github.sha }}
