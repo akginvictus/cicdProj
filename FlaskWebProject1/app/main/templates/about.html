@@ -1,58 +1,49 @@
-{% extends "layout.html" %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} - My Flask Application</title>
 
-{% block content %}
-<section class="jumbotron text-center" style="margin-top: 40px; background: linear-gradient(135deg, #0d6efd 0%, #6610f2 100%); color: #fff;">
-    <div class="container">
-        <p class="lead text-uppercase letter-spacing">Aakash DevOps Project</p>
-        <h1 class="display-4">Automating delivery with confidence</h1>
-        <p class="lead">From linting to containerization and deployments, this project showcases a resilient CI/CD pipeline built with GitHub Actions and Docker.</p>
-        <a href="{{ url_for('home') }}" class="btn btn-lg btn-light">Back to Dashboard</a>
-    </div>
-</section>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('main.static', filename='content/bootstrap.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('main.static', filename='content/site.css') }}" />
+    <script src="{{ url_for('main.static', filename='scripts/modernizr-2.6.2.js') }}"></script>
+</head>
 
-<section class="row">
-    <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Pipeline</h3>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="{{ url_for('main.home') }}" class="navbar-brand">Application name</a>
             </div>
-            <div class="panel-body">
-                <p>Automated linting, testing, and Docker image builds ensure every commit is production ready.</p>
-                <span class="label label-success">GitHub Actions</span>
+
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ url_for('main.home') }}">Home</a></li>
+                    <li><a href="{{ url_for('main.about') }}">About</a></li>
+                    <li><a href="{{ url_for('main.contact') }}">Contact</a></li>
+                </ul>
             </div>
         </div>
     </div>
-    <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Container Strategy</h3>
-            </div>
-            <div class="panel-body">
-                <p>Images are published to Docker Hub with content hashes for traceability and repeatable deployments.</p>
-                <span class="label label-info">Docker</span>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Team Impact</h3>
-            </div>
-            <div class="panel-body">
-                <p>Developers focus on features while pipelines safeguard quality, uptime, and customer trust.</p>
-                <span class="label label-warning">Reliability</span>
-            </div>
-        </div>
-    </div>
-</section>
 
-<section class="well">
-    <h3>What makes this special?</h3>
-    <ul class="list-unstyled">
-        <li><span class="glyphicon glyphicon-ok text-success"></span> End-to-end automation from code to container.</li>
-        <li><span class="glyphicon glyphicon-ok text-success"></span> Secure secret management for registry access.</li>
-        <li><span class="glyphicon glyphicon-ok text-success"></span> Production-ready Flask app template with responsive UI.</li>
-    </ul>
-</section>
+    <div class="container body-content" style="padding-top: 70px;">
+        {% block content %}{% endblock %}
+        <hr />
+        <footer>
+            <p>&copy; {{ year }} - My Flask Application</p>
+        </footer>
+    </div>
 
-{% endblock %}
+    <script src="{{ url_for('main.static', filename='scripts/jquery-1.10.2.js') }}"></script>
+    <script src="{{ url_for('main.static', filename='scripts/bootstrap.js') }}"></script>
+    <script src="{{ url_for('main.static', filename='scripts/respond.js') }}"></script>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>

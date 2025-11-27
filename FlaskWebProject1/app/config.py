@@ -1,22 +1,28 @@
 """
-Configuration objects for the Flask application.
+Compatibility re-export layer for the old import path.
+
+Azure and tests expect Config to be importable at:
+    from FlaskWebProject1.config import Config
 """
 
-from __future__ import annotations
+from FlaskWebProject1.app.config import Config
 
-import os
-from dataclasses import dataclass
+_config = Config()
 
+POSTGRES_HOST = _config.POSTGRES_HOST
+POSTGRES_DB = _config.POSTGRES_DB
+POSTGRES_USER = _config.POSTGRES_USER
+POSTGRES_PASSWORD = _config.POSTGRES_PASSWORD
 
-@dataclass
-class Config:
-    """Base configuration loaded into the Flask app."""
+REDIS_HOST = _config.REDIS_HOST
+REDIS_PORT = _config.REDIS_PORT
 
-    SECRET_KEY: str = os.getenv("SECRET_KEY", "dev-secret-key")
-    POSTGRES_HOST: str = os.getenv("POSTGRES_HOST", "db")
-    POSTGRES_DB: str = os.getenv("POSTGRES_DB", "appdb")
-    POSTGRES_USER: str = os.getenv("POSTGRES_USER", "appuser")
-    POSTGRES_PASSWORD: str = os.getenv("POSTGRES_PASSWORD", "1234")
-    REDIS_HOST: str = os.getenv("REDIS_HOST", "redis")
-    REDIS_PORT: int = int(os.getenv("REDIS_PORT", "6379"))
-
+__all__ = [
+    "Config",
+    "POSTGRES_HOST",
+    "POSTGRES_DB",
+    "POSTGRES_USER",
+    "POSTGRES_PASSWORD",
+    "REDIS_HOST",
+    "REDIS_PORT",
+]
