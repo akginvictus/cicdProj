@@ -1,16 +1,4 @@
-"""
-This script runs the FlaskWebProject1 application using a development server.
-"""
+from FlaskWebProject1.app import app
 
-from os import environ
-from FlaskWebProject1.app import create_app
-
-app = create_app()
-
-if __name__ == '__main__':
-    HOST = environ.get('SERVER_HOST', '0.0.0.0')
-    try:
-        PORT = int(environ.get('SERVER_PORT', '8000'))
-    except ValueError:
-        PORT = 5555
-    app.run(host=HOST, port=PORT)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8000)

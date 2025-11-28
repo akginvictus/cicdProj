@@ -1,14 +1,10 @@
-from typing import Optional, Type
-from flask import Flask
-from .config import Config
+from flask import Blueprint
 
-def create_app(config_class: Optional[Type[Config]] = None) -> Flask:
-    app = Flask(__name__, instance_relative_config=False)
+bp = Blueprint(
+    "main",
+    __name__,
+    template_folder="templates",
+    static_folder="static"
+)
 
-    app.config.from_object(config_class or Config)
-
-    # Register blueprint
-    from .main import bp as main_bp
-    app.register_blueprint(main_bp)
-
-    return app
+from . import routes
