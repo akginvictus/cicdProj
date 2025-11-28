@@ -29,9 +29,6 @@
 import os
 from dataclasses import dataclass
 
-import os
-from dataclasses import dataclass
-
 @dataclass
 class Config:
     SECRET_KEY: str = os.getenv("SECRET_KEY", "dev-key")

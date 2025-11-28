@@ -10,4 +10,4 @@ ENV PORT=8000
 
 EXPOSE 8000
 
-CMD ["sh", "-c", "gunicorn --bind 0.0.0.0:${PORT:-8000} --workers 2 --timeout 120 --access-logfile - --error-logfile - runserver:app"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers=2", "runserver:app"]

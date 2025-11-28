@@ -166,7 +166,7 @@
 
 
 from flask import render_template
-from . import bp
+from FlaskWebProject1.app.main import bp
 
 @bp.route("/")
 def home():
