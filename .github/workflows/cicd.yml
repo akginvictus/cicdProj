@@ -1,124 +1,73 @@
-# name: devops app
-
-# on:
-#   push:
-#     branches: [ "main" ]
-#   pull_request:
-#     branches: [ "main" ]
-
-
-# jobs:
-#   build:
-
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v4
-#       - name: Set up Python 3.9
-#         uses: actions/setup-python@v3
-#         with:
-#           python-version: 3.9
-
-#       - name: Writing a message
-#         run: echo "I'm Aakash"
-
-#       - name: List Files
-#         run: ls -al
-
-#       - name: Create temp directories
-#         run: |
-#           mkdir -p testDir
-#           mkdir -p testDir2
-
-#       - name: Install Dependencies
-#         run: |
-#           python -m pip install --upgrade pip
-#           pip install -r requirements.txt
-#           python -m pip install flake8
-        
-
-#       - name: Lint Check
-#         run: |
-#           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-#           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics   
-#   deploy:
-#     runs-on: ubuntu-latest
-#     needs: build
-
-#     steps:
-#       - name: Check out branch
-#         uses: actions/checkout@v4
-
-#       - name: Docker Login
-#         uses: docker/login-action@v2
-#         with:
-#           username: ${{ secrets.CICD_USERNAME }}
-#           password: ${{ secrets.DOCKER_PASSWORD }}
-
-#       - name: Build and Push Image
-#         env:
-#           DOCKER_USER: ${{ secrets.CICD_USERNAME }}
-#         run: |
-#           docker build -t $DOCKER_USER/devops:${{ github.sha }} .
-#           docker push $DOCKER_USER/devops:${{ github.sha }}
-#           docker tag $DOCKER_USER/devops:${{ github.sha }} $DOCKER_USER/devops:latest
-#           docker push $DOCKER_USER/devops:latest
-
-#       - name: Deploy to Azure Web App
-#         uses: azure/webapps-deploy@v2
-#         with:
-#           app-name: 'akgepita'
-#           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-#           images: '${{ secrets.CICD_USERNAME }}/devops:${{ github.sha }}'
-
-
-name: CI/CD Pipeline - Docker to Azure Web App
+name: devops app
 
 on:
   push:
-    branches: ["main"]
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
 
 jobs:
-  build_and_deploy:
+  build:
+
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.9
+
+      - name: Writing a message
+        run: echo "I'm Aakash"
+
+      - name: List Files
+        run: ls -al
+
+      - name: Create temp directories
+        run: |
+          mkdir -p testDir
+          mkdir -p testDir2
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          python -m pip install flake8
+        
+
+      - name: Lint Check
+        run: |
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics   
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
 
     steps:
-    # -------------------------------------------------------
-    # 1. Checkout Code
-    # -------------------------------------------------------
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Check out branch
+        uses: actions/checkout@v4
 
-    # -------------------------------------------------------
-    # 2. Login to Docker Hub using secrets
-    #    (MUST create DOCKER_USERNAME + DOCKER_PASSWORD secrets)
-    # -------------------------------------------------------
-    - name: Docker Hub Login
-      uses: docker/login-action@v2
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Docker Login
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.CICD_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
-    # -------------------------------------------------------
-    # 3. Build Docker Image
-    # -------------------------------------------------------
-    - name: Build Docker Image
-      run: |
-        docker build -t ${{ secrets.DOCKER_USERNAME }}/cicdproj:latest .
+      - name: Build and Push Image
+        env:
+          DOCKER_USER: ${{ secrets.CICD_USERNAME }}
+        run: |
+          docker build -t $DOCKER_USER/devops:${{ github.sha }} .
+          docker push $DOCKER_USER/devops:${{ github.sha }}
+          docker tag $DOCKER_USER/devops:${{ github.sha }} $DOCKER_USER/devops:latest
+          docker push $DOCKER_USER/devops:latest
 
-    # -------------------------------------------------------
-    # 4. Push Docker Image to Docker Hub
-    # -------------------------------------------------------
-    - name: Push Docker Image
-      run: |
-        docker push ${{ secrets.DOCKER_USERNAME }}/cicdproj:latest
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'akgepita'
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          images: '${{ secrets.CICD_USERNAME }}/devops:${{ github.sha }}'
 
-    # -------------------------------------------------------
-    # 5. Deploy to Azure Web App (Linux + Docker)
-    #    (MUST add AZURE_WEBAPP_PUBLISH_PROFILE secret)
-    # -------------------------------------------------------
-    - name: Deploy to Azure Web App (Docker)
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: "akgepita"
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        images: "${{ secrets.DOCKER_USERNAME }}/cicdproj:latest"
+
