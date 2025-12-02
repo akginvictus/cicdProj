@@ -2,19 +2,23 @@
 
 {% block content %}
 
-<h2>{{ title }}.</h2>
-<h3>{{ message }}</h3>
+<section class="page-heading">
+    <h1>Contact</h1>
+    <p class="lead">Have questions about the pipeline or deployment? Reach out.</p>
+</section>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
-
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<div class="contact-grid">
+    <div class="contact-card">
+        <h3>Reach me at</h3>
+        <p><strong>Email:</strong> <a href="mailto:Support@example.com">support@example.com</a></p>
+        <p><strong>Location:</strong> One Microsoft Way, Redmond, WA 98052-6399</p>
+        <p><strong>Phone:</strong> +1 (425) 555-0100</p>
+    </div>
+    <div class="contact-card">
+        <h3>About this app</h3>
+        <p>This contact page is served from a Dockerized Flask app running on Azure Web App, deployed via CI/CD.</p>
+        <p>Every change you see here was built and shipped automatically from GitHub.</p>
+    </div>
+</div>
 
 {% endblock %}

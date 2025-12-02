@@ -1,5 +1,32 @@
 {% extends "layout.html" %}
 {% block content %}
-<h1>Welcome Aakash</h1>
-<p>This is running from Azure Docker Web App.</p>
+
+<section class="hero">
+    <div class="hero-inner">
+        <h1 class="hero-title">Aakash DevOps Project</h1>
+        <p class="hero-subtitle">
+            Code ➝ Test ➝ Container ➝ Deploy — fully automated with GitHub Actions and Azure Web Apps.
+        </p>
+        <div class="hero-actions">
+            <a href="{{ url_for('main.about') }}" class="btn btn-primary btn-lg">View Pipeline Story</a>
+            <a href="{{ url_for('main.contact') }}" class="btn btn-outline-light btn-lg">Get in touch</a>
+        </div>
+    </div>
+</section>
+
+<section class="feature-grid">
+    <div class="feature-card">
+        <h3>Continuous Integration</h3>
+        <p>Each push runs tests and linting so broken code never reaches production.</p>
+    </div>
+    <div class="feature-card">
+        <h3>Dockerized Delivery</h3>
+        <p>Flask is packaged into a lightweight container image and pushed to Docker Hub.</p>
+    </div>
+    <div class="feature-card">
+        <h3>Azure Deployment</h3>
+        <p>GitHub Actions deploys the latest image to Azure Web App for a reliable, repeatable release.</p>
+    </div>
+</section>
+
 {% endblock %}
