@@ -1,5 +1,13 @@
 from flask import Blueprint
 
-bp = Blueprint('main', __name__, template_folder='templates', static_folder='static')
+# Main blueprint for the application. Explicitly point to this package's
+# templates and static folders so Flask uses the new UI correctly.
+bp = Blueprint(
+    "main",
+    __name__,
+    template_folder="templates",
+    static_folder="static",
+)
 
-from FlaskWebProject1.app.main import routes
+# Use a relative import so this works regardless of the package name.
+from . import routes
