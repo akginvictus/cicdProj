@@ -8,6 +8,26 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('main.static', filename='content/bootstrap.min.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ url_for('main.static', filename='content/site.css') }}" />
     <script src="{{ url_for('main.static', filename='scripts/modernizr-2.6.2.js') }}"></script>
+    <style>
+        /* Minimal inline styles so the page never looks completely unstyled,
+           even if external CSS fails to load. */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: #0f172a;
+            color: #e5e7eb;
+        }
+        .navbar-inverse {
+            background: #020617;
+            border: none;
+        }
+        .navbar-inverse .navbar-brand,
+        .navbar-inverse .navbar-nav > li > a {
+            color: #e5e7eb;
+        }
+        .navbar-inverse .navbar-nav > li > a:hover {
+            color: #ffffff;
+        }
+    </style>
 </head>
 
 <body>
