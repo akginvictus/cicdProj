@@ -180,3 +180,7 @@ def about():
 def contact():
     return render_template("contact.html", title="Contact", year=2025)
 
+@bp.route("/info")
+def info():
+    return render_template("info.html", title="Contact", year=2025)
+
