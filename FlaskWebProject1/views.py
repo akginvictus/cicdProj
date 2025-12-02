@@ -90,3 +90,11 @@ def contact():
         title='Contact',
         year=datetime.now().year
     )
+
+@main.route('/info', endpoint='info')
+def info():
+    return render_template(
+        'info.html',
+        title='Info',
+        year=datetime.now().year
+    )
